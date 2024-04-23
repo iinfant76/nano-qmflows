@@ -75,7 +75,6 @@ cp2k:
         scf_guess: "restart"
 """, Loader=UniqueSafeLoader))
 
-
 #: Settings for a PBE calculation to compute a guess wave function
 cp2k_pbe_guess = Settings(yaml.load("""
 cp2k:
@@ -106,6 +105,48 @@ cp2k:
     run_type:
       energy
 
+  force_eval:
+    subsys:
+      cell:
+        periodic: "None"
+    dft:
+      xc:
+        xc_functional pbe: {}
+      scf:
+        eps_scf: 1e-06
+        max_scf: 200
+        scf_guess: "restart"
+""", Loader=UniqueSafeLoader))
+
+#: NEW
+cp2k_dos_guess = Settings(yaml.load("""
+cp2k:
+  global:
+    run_type:
+      energy
+  force_eval:
+    subsys:
+      cell:
+        periodic: "None"
+    dft:
+      xc:
+        xc_functional pbe: {}
+      scf:
+        eps_scf: 1e-6
+        added_mos: 0
+        scf_guess: "restart"
+        ot:
+          minimizer: "DIIS"
+          n_diis: 7
+          preconditioner: "FULL_SINGLE_INVERSE"
+""", Loader=UniqueSafeLoader))
+
+#: NEW
+cp2k_dos_main = Settings(yaml.load("""
+cp2k:
+  global:
+    run_type:
+      energy
   force_eval:
     subsys:
       cell:
