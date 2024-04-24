@@ -123,7 +123,7 @@ cp2k_dos_guess = Settings(yaml.load("""
 cp2k:
   global:
     run_type:
-      energy
+      energy_force
   force_eval:
     subsys:
       cell:
@@ -139,6 +139,8 @@ cp2k:
           minimizer: "DIIS"
           n_diis: 7
           preconditioner: "FULL_SINGLE_INVERSE"
+      pdos:
+        nlumo: 1000 
 """, Loader=UniqueSafeLoader))
 
 #: NEW
@@ -146,7 +148,7 @@ cp2k_dos_main = Settings(yaml.load("""
 cp2k:
   global:
     run_type:
-      energy
+      energy_force
   force_eval:
     subsys:
       cell:
@@ -158,6 +160,8 @@ cp2k:
         eps_scf: 1e-06
         max_scf: 200
         scf_guess: "restart"
+      pdos:
+        nlumo: 1000 
 """, Loader=UniqueSafeLoader))
 
 #: Settings for a R2SCAN calculation to compute a guess wave function
