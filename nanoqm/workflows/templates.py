@@ -119,49 +119,36 @@ cp2k:
 """, Loader=UniqueSafeLoader))
 
 #: NEW
-cp2k_dos_guess = Settings(yaml.load("""
+cp2k_train_guess = Settings(yaml.load("""
 cp2k:
   global:
     run_type:
       energy_force
   force_eval:
-    subsys:
-      cell:
-        periodic: "None"
     dft:
-      xc:
-        xc_functional pbe: {}
       scf:
         eps_scf: 1e-6
+        max_scf: 200
         added_mos: 0
         scf_guess: "restart"
         ot:
           minimizer: "DIIS"
           n_diis: 7
           preconditioner: "FULL_SINGLE_INVERSE"
-      pdos:
-        nlumo: 1000 
 """, Loader=UniqueSafeLoader))
 
 #: NEW
-cp2k_dos_main = Settings(yaml.load("""
+cp2k_train_main = Settings(yaml.load("""
 cp2k:
   global:
     run_type:
       energy_force
   force_eval:
-    subsys:
-      cell:
-        periodic: "None"
     dft:
-      xc:
-        xc_functional pbe: {}
       scf:
         eps_scf: 1e-06
-        max_scf: 200
+        max_scf: 0
         scf_guess: "restart"
-      pdos:
-        nlumo: 1000 
 """, Loader=UniqueSafeLoader))
 
 #: Settings for a R2SCAN calculation to compute a guess wave function
