@@ -146,8 +146,7 @@ cp2k:
   force_eval:
     dft:
       scf:
-        eps_scf: 1e-06
-        max_scf: 0
+        eps_scf: 1e-1
         scf_guess: "restart"
 """, Loader=UniqueSafeLoader))
 
