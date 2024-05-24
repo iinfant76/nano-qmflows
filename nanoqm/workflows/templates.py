@@ -119,6 +119,7 @@ cp2k:
 """, Loader=UniqueSafeLoader))
 
 #: NEW
+# This part does no go here. If train is present, we have to include cp2k.force_eval.dft.print.pdos.nlumo = active_space[1]
 cp2k_train_guess = Settings(yaml.load("""
 cp2k:
   global:
@@ -482,7 +483,12 @@ def create_settings_from_template(
         return generate_auxiliar_basis(setts + kinds, general.basis, general.aux_fit)
     else:
         return setts + kinds
-
+#: NEW
+    #if train in template_name:
+    #    s = Settings()
+    #    s.cp2k.force_eval.dft.print.pdos.nlumo = active_space[1]
+    #    return s + kinds  
+#: NEW
 
 def read_unique_atomic_labels(path_traj_xyz: str | os.PathLike[str]) -> frozenset[str]:
     """Return the unique atomic labels."""
