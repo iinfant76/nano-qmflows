@@ -468,6 +468,7 @@ def generate_kinds(elements: Iterable[str], basis: str, potential: str) -> Setti
 templates_dict = {
     "guess": cp2k_guess, "main": cp2k_main,
     "pbe_guess": cp2k_pbe_guess, "pbe_main": cp2k_pbe_main,
+    "train_guess": cp2k_train_guess, "train_main": cp2k_train_main,
     "scan_guess": cp2k_scan_guess, "scan_main": cp2k_scan_main,
     "pbe0_guess": cp2k_pbe0_guess, "pbe0_main": cp2k_pbe0_main,
     "hse06_guess": cp2k_hse06_guess, "hse06_main": cp2k_hse06_main,
