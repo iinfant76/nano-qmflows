@@ -118,7 +118,6 @@ cp2k:
         scf_guess: "restart"
 """, Loader=UniqueSafeLoader))
 
-#: NEW
 cp2k_train_guess = Settings(yaml.load("""
 cp2k:
   global:
@@ -145,7 +144,6 @@ cp2k:
           preconditioner: "FULL_SINGLE_INVERSE"
 """, Loader=UniqueSafeLoader))
 
-#: NEW
 cp2k_train_main = Settings(yaml.load("""
 cp2k:
   global:
