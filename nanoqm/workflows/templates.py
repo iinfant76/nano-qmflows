@@ -131,13 +131,16 @@ cp2k:
       xc:
         xc_functional pbe: {}
       print:
-        pdos:
-          nlumo: -1
+        voronoi:
+          molecular_properties: "" 
+          voronoi_radii: "covalent" 
+          filename: =voronoi.txt
       scf:
         eps_scf: 1e-6
         max_scf: 200
         added_mos: 0
         scf_guess: "restart"
+        IGNORE_CONVERGENCE_FAILURE: "" 
         ot:
           minimizer: "DIIS"
           n_diis: 7
@@ -155,6 +158,8 @@ cp2k:
         xc_functional pbe: {}
       scf:
         eps_scf: 1e-1
+        IGNORE_CONVERGENCE_FAILURE: ""
+        max_scf: 1         
         scf_guess: "restart"
 """, Loader=UniqueSafeLoader))
 
