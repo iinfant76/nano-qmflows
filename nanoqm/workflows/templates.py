@@ -127,19 +127,6 @@ cp2k:
     print:
       forces:
         filename: =forces.xyz
-    properties:
-      resp:
-        sphere_sampling:
-          auto_vdw_radii_table: "cambridge"
-        constraint:
-          atom_list: "1..240"
-          equal_charges: ""
-        cOnstraint:
-          atom_list: "241..352"
-          equal_charges: ""
-        Constraint:
-          atom_list: "353..416"
-          equal_charges: "" 
     dft:
       poisson:
         poisson_solver: "MULTIPOLE"
@@ -179,7 +166,10 @@ cp2k:
         periodic: "NONE" 
       xc:
         xc_functional:
-          mgga_xc_hle17:      
+          mgga_xc_hle17: {}       
+        xc_grid:
+            xc_deriv: "spline3"
+            xc_smooth_rho: "none"
       print:
         voronoi:
           molecular_properties: "" 
@@ -230,7 +220,10 @@ cp2k:
         periodic: "NONE" 
       xc:
         xc_functional:
-          mgga_xc_hle17: 
+            mgga_xc_hle17: {}
+        xc_grid:
+            xc_deriv: "spline3"
+            xc_smooth_rho: "none"
       scf:
         eps_scf: 1e-1
         IGNORE_CONVERGENCE_FAILURE: ""
@@ -546,7 +539,8 @@ def generate_kinds(elements: Iterable[str], basis: str, potential: str) -> Setti
 templates_dict = {
     "guess": cp2k_guess, "main": cp2k_main,
     "pbe_guess": cp2k_pbe_guess, "pbe_main": cp2k_pbe_main,
-    "train_guess": cp2k_train_guess, "train_main": cp2k_train_main,
+    "train_pbe_guess": cp2k_train_pbe_guess, "train_pbe_main": cp2k_train_pbe_main,
+    "train_hle17_guess": cp2k_train_hle17_guess, "train_hle17_main": cp2k_train_hle17_main,
     "scan_guess": cp2k_scan_guess, "scan_main": cp2k_scan_main,
     "pbe0_guess": cp2k_pbe0_guess, "pbe0_main": cp2k_pbe0_main,
     "hse06_guess": cp2k_hse06_guess, "hse06_main": cp2k_hse06_main,
