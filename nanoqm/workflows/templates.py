@@ -118,7 +118,7 @@ cp2k:
         scf_guess: "restart"
 """, Loader=UniqueSafeLoader))
 
-cp2k_train_guess = Settings(yaml.load("""
+cp2k_train_pbe_guess = Settings(yaml.load("""
 cp2k:
   global:
     run_type:
@@ -127,7 +127,23 @@ cp2k:
     print:
       forces:
         filename: =forces.xyz
+    properties:
+      resp:
+        sphere_sampling:
+          auto_vdw_radii_table: "cambridge"
+        constraint:
+          atom_list: "1..240"
+          equal_charges: ""
+        cOnstraint:
+          atom_list: "241..352"
+          equal_charges: ""
+        Constraint:
+          atom_list: "353..416"
+          equal_charges: "" 
     dft:
+      poisson:
+        poisson_solver: "MULTIPOLE"
+        periodic: "NONE" 
       xc:
         xc_functional pbe: {}
       print:
@@ -147,15 +163,74 @@ cp2k:
           preconditioner: "FULL_SINGLE_INVERSE"
 """, Loader=UniqueSafeLoader))
 
-cp2k_train_main = Settings(yaml.load("""
+
+cp2k_train_hle17_guess = Settings(yaml.load("""
+cp2k:
+  global:
+    run_type:
+      energy_force
+  force_eval:
+    print:
+      forces:
+        filename: =forces.xyz
+    dft:
+      poisson:
+        poisson_solver: "MULTIPOLE"
+        periodic: "NONE" 
+      xc:
+        xc_functional:
+          mgga_xc_hle17:      
+      print:
+        voronoi:
+          molecular_properties: "" 
+          voronoi_radii: "covalent" 
+          filename: =voronoi.txt
+      scf:
+        eps_scf: 1e-6
+        max_scf: 200
+        added_mos: 0
+        scf_guess: "restart"
+        IGNORE_CONVERGENCE_FAILURE: "" 
+        ot:
+          minimizer: "DIIS"
+          n_diis: 7
+          preconditioner: "FULL_SINGLE_INVERSE"
+""", Loader=UniqueSafeLoader))
+
+
+cp2k_train_pbe_main = Settings(yaml.load("""
 cp2k:
   global:
     run_type:
       energy_force
   force_eval:
     dft:
+      poisson:
+        poisson_solver: "MULTIPOLE"
+        periodic: "NONE" 
       xc:
         xc_functional pbe: {}
+      scf:
+        eps_scf: 1e-1
+        IGNORE_CONVERGENCE_FAILURE: ""
+        max_scf: 1         
+        scf_guess: "restart"
+""", Loader=UniqueSafeLoader))
+
+
+cp2k_train_hle17_main = Settings(yaml.load("""
+cp2k:
+  global:
+    run_type:
+      energy_force
+  force_eval:
+    dft:
+      poisson:
+        poisson_solver: "MULTIPOLE"
+        periodic: "NONE" 
+      xc:
+        xc_functional:
+          mgga_xc_hle17: 
       scf:
         eps_scf: 1e-1
         IGNORE_CONVERGENCE_FAILURE: ""
